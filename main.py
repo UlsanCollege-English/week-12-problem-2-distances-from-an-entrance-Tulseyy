@@ -1,6 +1,4 @@
 
-## main.py
-```python
 from collections import deque
 
 
@@ -19,16 +17,27 @@ def bfs_distances(graph, start):
         - Only include reachable nodes.
         - If start is not in graph, return {}.
     """
-    # TODO Step 1: Read and understand the problem above.
-    # TODO Step 2: Re-phrase what this function should do in a short comment.
-    # TODO Step 3: Identify inputs, output, and key variables (queue, visited, dist).
-    # TODO Step 4: Plan the BFS steps on paper or in comments.
-    # TODO Step 5: Write pseudocode for BFS that fills the dist dictionary.
-    # TODO Step 6: Turn your pseudocode into working Python code here.
-    # TODO Step 7: Test using small graph examples to verify the distances.
-    # TODO Step 8: Make sure your solution is O(V + E), not slower.
-
-    raise NotImplementedError("bfs_distances is not implemented yet")
+    # If start node is not in the graph, return empty dict
+    if start not in graph:
+        return {}
+    
+    # Initialize distance dict and queue for BFS
+    dist = {start: 0}
+    queue = deque([start])
+    
+    # Process nodes level by level
+    while queue:
+        current = queue.popleft()
+        current_dist = dist[current]
+        
+        # Explore all neighbors of current node
+        for neighbor in graph[current]:
+            # If neighbor not yet visited, record distance and add to queue
+            if neighbor not in dist:
+                dist[neighbor] = current_dist + 1
+                queue.append(neighbor)
+    
+    return dist
 
 
 if __name__ == "__main__":
